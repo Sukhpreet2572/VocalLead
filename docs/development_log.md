@@ -90,3 +90,8 @@ Local servers are temporary verification processes and are stopped at final tear
 ### Next phase prerequisites
 
 Explicit authorization for Phase 2; LiveKit project/runtime and worker connectivity; Gemini, STT and streaming TTS credentials; current official SDK compatibility verification; English/Hindi/Hinglish and code-switching provider evaluation; microphone-capable browser on localhost/HTTPS; audio consent, retention and interruption requirements; local secrets provisioning and a small consented/synthetic conversation evaluation set. Do not implement these automatically.
+
+
+## Phase 4 local customer intelligence
+
+Added owner-bound customers, leads, score history, and structured memory via Alembic `c19b882434ef`. Local demo API and Leads dashboard use the same deterministic scoring service as per-call agent tools. The seeded inventory example scores 90 (30 inventory + 25 intent + 20 timeline + 15 visit + 0 contact); a later budget correction persists and another owner receives 404. Backend tests passed 21 cases, including mocked Gemini structured contracts. Frontend typecheck, lint, and production build passed. Gemini structured extraction and sentiment adapters exist but have no credentials and are not live-verified. Text fallback detects limited phrases and returns UNKNOWN otherwise. No live voice call was possible. Phase 3 and Phase 4 were prepared as separate commits after local verification.

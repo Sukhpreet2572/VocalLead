@@ -1,5 +1,5 @@
 from datetime import datetime, timezone
-from sqlalchemy import Boolean, DateTime, Integer, String
+from sqlalchemy import Boolean, DateTime, Integer, String, Index
 from sqlalchemy.orm import Mapped, mapped_column
 from app.database import Base
 
@@ -10,10 +10,12 @@ def utc_now() -> datetime:
 
 class VoiceSession(Base):
     __tablename__ = "voice_sessions"
+    __table_args__ = (Index("ix_voice_owner_status", "owner_hash", "status"),)
     id: Mapped[str] = mapped_column(String(36), primary_key=True)
     room_name: Mapped[str] = mapped_column(String(80), unique=True, nullable=False)
     participant_identity: Mapped[str] = mapped_column(String(80), unique=True, nullable=False)
     owner_hash: Mapped[str] = mapped_column(String(64), nullable=False)
+    customer_id: Mapped[str | None] = mapped_column(String(36))
     preferred_language: Mapped[str] = mapped_column(String(12), nullable=False)
     status: Mapped[str] = mapped_column(String(16), nullable=False, default="CREATED")
     consent_acknowledged: Mapped[bool] = mapped_column(Boolean, nullable=False)

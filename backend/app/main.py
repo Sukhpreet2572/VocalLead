@@ -10,6 +10,7 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 from app.api.routes.system import router
 from app.api.routes.voice import router as voice_router
 from app.api.routes.knowledge import router as knowledge_router
+from app.api.routes.leads import router as leads_router
 from app.models.voice_session import VoiceSession  # noqa: F401 — migration registration
 from app.core.config import Settings
 from app.core.logging import configure_logging
@@ -36,7 +37,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                           lifespan=lifespan, debug=False)
     application.state.settings = config
     application.add_middleware(CORSMiddleware, allow_origins=config.cors_origins,
-                               allow_credentials=False, allow_methods=["GET", "POST"], allow_headers=["Content-Type", "X-Voice-Owner"])
+                               allow_credentials=False, allow_methods=["GET", "POST", "PATCH"], allow_headers=["Content-Type", "X-Voice-Owner"])
 
     @application.exception_handler(StarletteHTTPException)
     async def http_error(request: Request, exc: HTTPException) -> JSONResponse:
@@ -61,6 +62,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     application.include_router(router)
     application.include_router(voice_router)
     application.include_router(knowledge_router)
+    application.include_router(leads_router)
     return application
 
 

@@ -1,0 +1,10 @@
+.leads-page { display: grid; gap: 24px; }
+.leads-section { padding: 24px; min-width: 0; }
+.leads-section label { display: grid; gap: 8px; margin: 14px 0; }
+.leads-section select, .leads-section textarea { width: 100%; padding: 10px; border: 1px solid var(--border, #d3d9e2); border-radius: 8px; background: transparent; color: inherit; }
+.leads-section textarea { min-height: 105px; }
+.lead-table-wrap { overflow-x: auto; }
+.leads-section table { border-collapse: collapse; width: 100%; font-size: 13px; }
+.leads-section th, .leads-section td { padding: 9px; text-align: left; border-bottom: 1px solid #ddd; }
+.leads-section tbody tr { cursor: pointer; }
+.leads-section tbody tr:hover { background: #f0f4f7; }

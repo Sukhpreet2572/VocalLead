@@ -7,6 +7,7 @@ import { useSystemStatus } from "./hooks/useSystemStatus";
 import { Overview } from "./pages/Overview";
 import { Voice } from "./pages/Voice";
 import { Knowledge } from "./pages/Knowledge";
+import { Leads } from "./pages/Leads";
 
 function currentPage() {
   return window.location.hash.slice(1) || "overview";
@@ -79,6 +80,8 @@ export default function App() {
             <Voice />
           ) : page === "knowledge" ? (
             <Knowledge />
+          ) : page === "leads" ? (
+            <Leads />
           ) : (
             <div className="placeholder panel">
               <Construction size={38} />

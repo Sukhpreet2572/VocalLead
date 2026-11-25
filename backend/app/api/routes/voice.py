@@ -10,6 +10,8 @@ from livekit import api
 
 from app.database import get_session
 from app.models.voice_session import VoiceSession
+from app.models.customer import Customer, Lead
+from app.intelligence.service import create_demo_customer
 from app.schemas.voice import CreateVoiceSession, VoiceAvailability, VoiceSessionCreated, VoiceSessionInfo
 from app.voice.token_service import create_participant_token
 
@@ -77,11 +79,17 @@ async def create_session(body: CreateVoiceSession, request: Request, db: Session
     if existing:
         raise HTTPException(429, "End the current voice session before creating another")
     uid = str(uuid4())
+    if body.customer_id:
+        customer = db.get(Customer, body.customer_id)
+        if not customer or customer.owner_hash != owner_hash(x_voice_owner):
+            raise HTTPException(404, "Customer not found")
+    else:
+        customer, _ = create_demo_customer(db, owner_hash(x_voice_owner))
     room = f"vocalead-{uid}"
     identity = f"visitor-{uuid4()}"
     token, expires = create_participant_token(settings, room, identity, body.display_name)
     record = VoiceSession(id=uid, room_name=room, participant_identity=identity,
-                          owner_hash=owner_hash(x_voice_owner), preferred_language=body.preferred_language,
+                          owner_hash=owner_hash(x_voice_owner), customer_id=customer.id, preferred_language=body.preferred_language,
                           consent_acknowledged=True, consent_timestamp=datetime.now(timezone.utc), status="CREATED")
     db.add(record)
     db.commit()

@@ -8,16 +8,20 @@ from livekit.plugins import deepgram, elevenlabs, google, silero
 
 from app.agents.prompts import instructions
 from app.agents.knowledge_tools import search_properties, get_property_details, search_company_knowledge
+from app.agents.intelligence_tools import tools_for_session
 from app.core.config import Settings
 from app.database import build_engine, session_factory
 from app.models.voice_session import VoiceSession
+from app.rag.embeddings import selected
 
 settings = Settings()
 
 
 class SalesAgent(Agent):
-    def __init__(self, language: str) -> None:
-        super().__init__(instructions=instructions(language), tools=[search_properties, get_property_details, search_company_knowledge])
+    def __init__(self, language: str, session_id: str | None = None) -> None:
+        tools = [search_properties, get_property_details, search_company_knowledge]
+        if session_id: tools += tools_for_session(session_id)
+        super().__init__(instructions=instructions(language), tools=tools)
 
 
 server = AgentServer()
@@ -51,6 +55,13 @@ async def limit_session(room: str) -> None:
         await livekit.room.delete_room(api.DeleteRoomRequest(room=room))
 
 
+async def bound_context(session: AgentSession) -> None:
+    """Keep recent call turns while preserving the first system instruction."""
+    while True:
+        await asyncio.sleep(10)
+        session.history.truncate(max_items=30)
+
+
 @server.rtc_session(agent_name=settings.livekit_agent_name)
 async def voice_session(ctx):
     missing = [name for name, value in {
@@ -78,10 +89,13 @@ async def voice_session(ctx):
         vad=silero.VAD.load(),
     )
     timer = asyncio.create_task(limit_session(ctx.room.name))
+    context_timer = asyncio.create_task(bound_context(session))
     disconnected = asyncio.Event()
     ctx.room.on("disconnected", lambda: disconnected.set())
     try:
-        await session.start(room=ctx.room, agent=SalesAgent(language))
+        if settings.embedding_provider == "local":
+            await asyncio.wait_for(asyncio.to_thread(lambda: selected(settings).embed(["property search warmup"], "RETRIEVAL_QUERY")), 90)
+        await session.start(room=ctx.room, agent=SalesAgent(language, session_id))
         if session_id:
             await asyncio.to_thread(update_session, session_id, "ACTIVE")
         await session.generate_reply(instructions="Greet the customer as an AI assistant, then ask what kind of property they seek.")
@@ -94,6 +108,7 @@ async def voice_session(ctx):
         raise
     finally:
         timer.cancel()
+        context_timer.cancel()
 
 
 if __name__ == "__main__":

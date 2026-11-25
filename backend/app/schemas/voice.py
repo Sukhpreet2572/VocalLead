@@ -9,6 +9,7 @@ class CreateVoiceSession(BaseModel):
     preferred_language: Language = "en"
     consent_acknowledged: bool
     display_name: str | None = Field(default=None, max_length=60)
+    customer_id: str | None = Field(default=None, max_length=36)
 
 
 class VoiceSessionInfo(BaseModel):

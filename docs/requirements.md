@@ -5,10 +5,10 @@ Status describes implementation, not promises. Phase 1 validation evidence is re
 | ID | Fortivex requirement | Proposed implementation | Responsible module | Phase | Current status | Acceptance criteria |
 |---|---|---|---|---|---|---|
 | F01 | Real-time streaming voice | WebRTC, LiveKit worker, STT/VAD and TTS | app/voice, app/agents | 2 | Implemented; live integration blocked by credentials | Interrupted and uninterrupted calls stream with measured latency |
-| F02 | Context and persistent memory | Session history and durable customer preferences | app/memory, models | 2–3 | Planned | Returning user context is retrieved with consent |
+| F02 | Context and persistent memory | Bounded call context and owner-bound structured memory | app/intelligence, models | 4 | Local persistence and isolation tested; live return call unverified | Returning user context is retrieved with consent |
 | F03 | English, Hindi and Hinglish | Selector, multilingual STT/TTS and language prompt | app/voice | 2 | Implemented; speech quality unverified | Scripted and free-form language tests pass |
-| F04 | Lead qualification | Structured extraction with deterministic score | app/intelligence | 3 | Planned | Fixture inputs produce explainable reproducible scores |
-| F05 | Sentiment-aware behaviour | Evidence-based sentiment and response policy | app/intelligence | 3 | Planned | Negative sentiment prompts tested appropriate handling |
+| F04 | Lead qualification | Structured updates and deterministic inventory-based score | app/intelligence | 4 | Local 90-point example tested; Gemini extraction unverified | Fixture inputs produce explainable reproducible scores |
+| F05 | Sentiment-aware behaviour | Typed Gemini adapter and phrase fallback | app/intelligence | 4 | Fallback tested; live behaviour unverified | Negative sentiment prompts tested appropriate handling |
 | F06 | Semantic RAG | Gemini/local embeddings, Chroma and SQL unit filters | app/rag, knowledge_base | 3 | Implemented; genuine local semantic retrieval measured, multilingual quality limited | Retrieval benchmark and grounded answers pass |
 | F07 | Appointment automation | Confirm timezone/slot and idempotent Calendar write | app/tools, integrations | 4 | Planned | One confirmed request yields one event and persisted record |
 | F08 | External CRM | HubSpot sync with retry/idempotency records | app/integrations | 4 | Planned | Lead updates sync once and failures are visible |
@@ -34,3 +34,13 @@ Status describes implementation, not promises. Phase 1 validation evidence is re
 Foundation tests isolate databases under pytest temporary paths, use no paid services and test both success and database failure. Health must remain available during database failure. Provider secrets must never appear in diagnostic output. Production diagnostics must be hidden. Browser checks cover real HTTP data, manual refresh, offline recovery and responsive placeholders.
 
 Later phases require a versioned consented/synthetic language corpus, STT accuracy and code-switching checks, interruption/latency measurements, retrieval precision, grounded-answer review, deterministic scoring fixtures, appointment collision and integration idempotency tests. Define thresholds and human review protocol before claiming AI quality. Do not score unimplemented functions as passing.
+
+## Phase 4 traceability update
+
+| ID | Phase 4 implementation | Verification / limitation |
+|---|---|---|
+| F02 | Context and persistent memory | Bounded call context and owner-bound structured memory | app/intelligence, models | 4 | Local persistence and isolation tested; live return call unverified | Returning user context is retrieved with consent |
+| F04 | Lead qualification | Structured updates and deterministic inventory-based score | app/intelligence | 4 | Local 90-point example tested; Gemini extraction unverified | Fixture inputs produce explainable reproducible scores |
+| F05 | Sentiment-aware behaviour | Typed Gemini adapter and phrase fallback | app/intelligence | 4 | Fallback tested; live behaviour unverified | Negative sentiment prompts tested appropriate handling |
+| F06 | Gurgaon alias and exact eligible-property rank boost | Original benchmark unchanged at 0.3846 Hit Rate@K; Hindi/Hinglish weak |
+| D07 | Local owner-hash access checks and no default transcript persistence | Production authentication and retention review still required |

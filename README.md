@@ -2,7 +2,7 @@
 
 Autonomous multilingual sales intelligence for real estate. Buyers often wait for follow-up while sales teams repeatedly collect the same requirements. VocaLead aims to qualify enquiries through natural English, Hindi and Hinglish conversations, retrieve relevant property knowledge and hand actionable context to sales teams.
 
-**Current delivery: Phase 3 knowledge subsystem implemented and locally verified.** Phase 1 and 2 remain. Six fictional properties and policy documents support structured inventory and a Chroma semantic index. Voice provider credentials are still absent. Persistent customer memory and sales operations remain planned.
+**Current delivery: Phase 4 customer intelligence implemented and locally verified.** Phase 1 and 2 remain. Six fictional properties and policy documents support structured inventory and a Chroma semantic index. Owner-bound local customer memory, deterministic scoring and a Leads dashboard are implemented. Voice provider credentials are still absent. Appointment booking and CRM remain planned.
 
 ## Run locally (Windows PowerShell)
 
@@ -69,3 +69,7 @@ Voice dependencies now installed: LiveKit React/Agents, Deepgram, Silero, Gemini
 Voice endpoints are restricted to local development and use a session-scoped owner key; this is not multi-tenant authentication. Keep diagnostics local; implement authentication/authorization before handling customer data or exposing the app publicly. External service reachability is not tested. Phase-wide commercial, scalability and deployment assumptions are outlined in [architecture](docs/architecture.md); they are not measured guarantees. Current verification evidence and environment blockers are in [development log](docs/development_log.md).
 
 Read [setup](docs/setup.md), [architecture](docs/architecture.md), [requirements](docs/requirements.md) and [repository instructions](AGENTS.md) before extending the project.
+
+## Phase 4 status
+
+The local customer intelligence slice now persists owner-bound demo profiles, partial requirements, explainable inventory-based scores and score history. The Leads page provides real API aggregates, a table, detail and deterministic text playground. LiveKit has per-call customer tools. Gemini extraction and sentiment adapters are implemented but unverified without credentials; the playground clearly uses a limited deterministic fallback. Live voice remains unverified. See docs/development_log.md and docs/rag_evaluation.md for measured results. No appointment or CRM integration is included.

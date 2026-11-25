@@ -9,6 +9,7 @@ import {
 } from "@livekit/components-react";
 import { RoomEvent, type Room } from "livekit-client";
 import { API_BASE_URL } from "../services/api";
+import { demoOwner } from "../services/demoOwner";
 import "./voice.css";
 
 type Availability = {
@@ -27,11 +28,7 @@ type Created = {
 type Event = { id: number; text: string; at: Date };
 
 function ownerKey(): string {
-  const existing = sessionStorage.getItem("vocalead_voice_owner");
-  if (existing) return existing;
-  const fresh = crypto.randomUUID() + crypto.randomUUID();
-  sessionStorage.setItem("vocalead_voice_owner", fresh);
-  return fresh;
+  return demoOwner();
 }
 
 async function apiCall<T>(
@@ -292,6 +289,7 @@ export function Voice() {
       const created = await apiCall<Created>("/sessions", "POST", {
         preferred_language: language,
         consent_acknowledged: consent,
+        customer_id: localStorage.getItem('vocalead-demo-customer') || undefined,
       });
       setSession(created);
       addEvent("Voice session created");
