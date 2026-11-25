@@ -1,0 +1,16 @@
+.git
+.env
+.env.*
+**/.venv
+**/node_modules
+**/dist
+**/__pycache__
+.npm-cache
+data
+Microsoft
+secrets
+**/*credentials*.json
+**/*service-account*.json
+**/*service_account*.json
+**/client_secret*.json
+**/*.log
