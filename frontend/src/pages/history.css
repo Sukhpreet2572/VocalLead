@@ -1,0 +1,10 @@
+.history-page { display: grid; gap: 24px; }
+.history-section { padding: 24px; min-width: 0; }
+.history-section label { display: grid; gap: 8px; margin: 14px 0; }
+.history-section select, .history-section input { width: 100%; padding: 10px; border: 1px solid #d3d9e2; border-radius: 8px; background: transparent; color: inherit; }
+.history-filters { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
+.history-table-wrap { overflow-x: auto; }
+.history-section table { border-collapse: collapse; width: 100%; font-size: 13px; }
+.history-section th, .history-section td { padding: 9px; text-align: left; border-bottom: 1px solid #ddd; }
+.history-section tbody tr { cursor: pointer; }
+.history-detail { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 24px; }

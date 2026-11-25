@@ -47,10 +47,29 @@ def run() -> dict:
         assert client.get("/api/v1/crm/records", headers=header).json()["items"][0]["lifecycle_status"] == "VISIT_BOOKED"
         assert client.get(f"/api/v1/appointments/{appointment['id']}", headers=other).status_code == 404
         assert client.get("/api/v1/appointments", headers=header).json()["total"] >= 1
+        summary_request = {"lead_id": lead["id"], "idempotency_key": secrets.token_hex(20)}
+        finalised = client.post("/api/v1/interactions/demo/finalise", headers=header, json=summary_request)
+        finalised.raise_for_status()
+        interaction = finalised.json()
+        assert interaction["status"] == "COMPLETED" and interaction["interaction_type"] == "LOCAL_DEMO"
+        assert interaction["duration_seconds"] is None and interaction["voice_session_id"] is None
+        assert interaction["structured"]["lead"]["score"] == 90
+        assert interaction["structured"]["business"]["appointment_id"] == appointment["id"]
+        assert client.get(f"/api/v1/interactions/{interaction['id']}", headers=header).json()["summary_text"]
+        assert client.post("/api/v1/interactions/demo/finalise", headers=header, json=summary_request).json()["id"] == interaction["id"]
+        assert client.get(f"/api/v1/interactions/{interaction['id']}", headers=other).status_code == 404
+        analytics = client.get("/api/v1/analytics/overview", headers=header).json()
+        assert analytics["interactions"]["total"] == 1
+        assert analytics["interactions"]["local_demo_interactions"] == 1
+        assert analytics["interactions"]["completed_voice_calls"] == 0
+        assert analytics["appointments"]["confirmed"] == 1
+        assert analytics["appointments"]["conversion_rate"] == 100.0
         cancelled = client.post(f"/api/v1/appointments/{appointment['id']}/cancel", headers=header); cancelled.raise_for_status()
         assert cancelled.json()["status"] == "CANCELLED"
         assert slot["start_at"] in [x["start_at"] for x in client.get(query, headers=header).json()["slots"]]
-        return {"lead_score": 90, "appointment_status": "CANCELLED", "duplicate_prevented": True,
+        return {"lead_score": 90, "summary_status": "COMPLETED", "summary_type": "LOCAL_DEMO",
+                "completed_voice_calls": 0, "confirmed_appointments_before_cancellation": 1,
+                "appointment_status": "CANCELLED", "duplicate_prevented": True,
                 "owner_isolation": True, "slot_released": True, "crm_lifecycle_at_booking": "VISIT_BOOKED"}
 
 if __name__ == "__main__":

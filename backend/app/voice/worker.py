@@ -14,6 +14,7 @@ from app.core.config import Settings
 from app.database import build_engine, session_factory
 from app.models.voice_session import VoiceSession
 from app.rag.embeddings import selected
+from app.summaries.service import finalise_voice
 
 settings = Settings()
 
@@ -45,6 +46,15 @@ def update_session(session_id: str, status: str, reason: str | None = None) -> N
                 if record.started_at:
                     record.duration_seconds = max(0, int((now - record.started_at.replace(tzinfo=timezone.utc)).total_seconds()))
             db.commit()
+    finally:
+        engine.dispose()
+
+
+def summarise_session(session_id: str, transient_text: str | None = None) -> None:
+    engine = build_engine(settings)
+    try:
+        with session_factory(engine)() as db:
+            finalise_voice(db, session_id, settings, transient_text)
     finally:
         engine.dispose()
 
@@ -103,6 +113,16 @@ async def voice_session(ctx):
         await disconnected.wait()
         if session_id:
             await asyncio.to_thread(update_session, session_id, "COMPLETED")
+            transient = None
+            if settings.voice_transcript_retention_enabled:
+                parts = [item.text_content for item in session.history.items
+                         if item.type == "message" and item.role == "user" and item.text_content]
+                transient = "\n".join(parts[-8:])[:4000] or None
+            try:
+                await asyncio.wait_for(asyncio.to_thread(summarise_session, session_id, transient), 20)
+            except Exception:
+                # Completion metadata remains durable; a failed summary is retried via API.
+                pass
     except Exception:
         if session_id:
             await asyncio.to_thread(update_session, session_id, "FAILED", "Voice worker stopped unexpectedly")

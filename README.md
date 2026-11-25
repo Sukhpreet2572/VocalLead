@@ -2,7 +2,7 @@
 
 Autonomous multilingual sales intelligence for real estate. Buyers often wait for follow-up while sales teams repeatedly collect the same requirements. VocaLead aims to qualify enquiries through natural English, Hindi and Hinglish conversations, retrieve relevant property knowledge and hand actionable context to sales teams.
 
-**Current delivery: Phase 5 local appointment booking and CRM verified.** Earlier voice, knowledge and customer intelligence features remain. Owner-bound customers can confirm a real local site visit slot, prevent duplicate bookings, cancel and see local CRM status. Google Calendar and HubSpot adapters are implemented but external writes remain unverified. Voice provider credentials are still absent.
+**Current delivery: Phase 6 local business workflow verified.** Owner-bound demo leads can be qualified, booked, recorded in local CRM, summarised and counted in analytics. Local demo interactions are labelled separately from completed voice calls. Google Calendar, HubSpot, live Gemini summarisation and real voice calls remain externally unverified.
 
 ## Run locally (Windows PowerShell)
 
@@ -55,7 +55,7 @@ npm run build
 
 ## Structure and stack
 
-`frontend/src/{components,pages,hooks,services,types}` contains the React/TypeScript/Tailwind UI and API client. `backend/app/{api,core,schemas}` implements the FastAPI/Pydantic foundation; `database.py` owns SQLAlchemy engines and sessions. `backend/migrations` holds Alembic setup, with no business tables yet. `backend/tests`, `infrastructure`, `scripts`, `knowledge_base` and `docs` separate verification, deployment and project material.
+`frontend/src/{components,pages,hooks,services,types}` contains the React/TypeScript/Tailwind UI and API client. `backend/app` contains FastAPI routes, persistent models, knowledge, automation, summaries and analytics. `backend/migrations` owns the schema. `backend/tests`, `infrastructure`, `scripts`, `knowledge_base` and `docs` separate verification, deployment and project material.
 
 Voice dependencies include LiveKit React/Agents, Deepgram, Silero, Gemini LLM and ElevenLabs TTS. Phase 3 adds Gemini/local embeddings, ChromaDB and PyMuPDF. Phase 5 uses Google Auth, Calendar REST and HubSpot REST adapters. React uses simple hash navigation.
 
@@ -64,7 +64,7 @@ Voice dependencies include LiveKit React/Agents, Deepgram, Silero, Gemini LLM an
 1. Foundation: configuration, liveness/readiness, UI, database, tests and docs.
 2. Real-time voice worker: implemented and unit-tested; real provider and microphone validation pending.
 3. Property knowledge, structured extraction, deterministic qualification and sentiment.
-4. Calendar/CRM integrations, summaries and measured analytics.
+4. Local booking, CRM, summaries and record-based analytics; external integrations and live voice need verification.
 
 Voice endpoints are restricted to local development and use a session-scoped owner key; this is not multi-tenant authentication. Keep diagnostics local; implement authentication/authorization before handling customer data or exposing the app publicly. External service reachability is not tested. Phase-wide commercial, scalability and deployment assumptions are outlined in [architecture](docs/architecture.md); they are not measured guarantees. Current verification evidence and environment blockers are in [development log](docs/development_log.md).
 
@@ -77,3 +77,7 @@ Phase 4 introduced owner-bound demo profiles, partial requirements, explainable 
 ## Phase 5 status
 
 The Appointments page uses actual owner-bound availability, proposals, explicit confirmation, database slot reservations, cancellation and local CRM records. Google Calendar and HubSpot adapters are available only when explicitly configured; their live operations have not been verified. See [setup](docs/setup.md) for the local workflow and [architecture](docs/architecture.md) for consistency limits.
+
+## Phase 6 status
+
+History stores structured, record-grounded summaries for local demos and completed voice sessions. Analytics and Overview count persisted leads, interactions, appointments and sync states with owner and date filters. The local workflow script verifies a synthetic booking, CRM lifecycle, summary, owner isolation and analytics. The Gemini narrative adapter has a mocked contract test; no live model or voice call has been verified. Run `backend/.venv/Scripts/python.exe scripts/verify_automation.py` after migrating the configured SQLite database. See [setup](docs/setup.md) and [development log](docs/development_log.md).

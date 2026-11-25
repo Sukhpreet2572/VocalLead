@@ -12,8 +12,8 @@ Status describes implementation, not promises. Phase 1 validation evidence is re
 | F06 | Semantic RAG | Gemini/local embeddings, Chroma and SQL unit filters | app/rag, knowledge_base | 3 | Implemented; genuine local semantic retrieval measured, multilingual quality limited | Retrieval benchmark and grounded answers pass |
 | F07 | Appointment automation | Owner-bound local slots, proposals, confirmation, cancellation; Google adapter | app/automation | 5 | Local workflow verified; Google live operation unverified | One confirmed request yields one reservation and persisted record |
 | F08 | External CRM | Local lifecycle record plus consent-gated HubSpot upsert adapter | app/automation | 5 | Local CRM verified; HubSpot live operation unverified | Lead and visit outcomes persist; external sync status is visible |
-| F09 | AI call summary | Structured post-call summary with evidence | app/intelligence | 4 | Planned | Summary preserves facts and flags uncertainty |
-| F10 | Business intelligence | Aggregates over actual calls/leads and Recharts | frontend/dashboard | 4 | Planned | Charts reconcile to persisted records |
+| F09 | AI call summary | Structured record-grounded summary with optional Gemini narrative | app/summaries | 6 | Local demo and mock adapter verified; live voice/LLM unverified | Summary preserves recorded facts and flags uncertainty |
+| F10 | Business intelligence | Owner/date-scoped aggregates from persisted records and accessible UI charts | app/analytics, frontend | 6 | Local workflow verified; production scale unverified | Counts reconcile to persisted records |
 | P01 | Functional foundation | FastAPI, React and honest status dashboard | app/api, frontend | 1 | Implemented | Live servers, health, readiness and dashboard verified |
 | P02 | Configuration and security | Typed root environment, secret-safe errors, CORS | app/core | 1 | Implemented | Optional keys absent; secrets excluded; diagnostics dev-only |
 | P03 | Database and migrations | SQLAlchemy/PostgreSQL, explicit SQLite, Alembic | app/database, migrations | 1 | Implemented; PostgreSQL runtime verification pending | SQLite health and migration pass; PostgreSQL verified with Docker available |
@@ -52,3 +52,11 @@ Later phases require a versioned consented/synthetic language corpus, STT accura
 | F07 | Local availability, short-lived proposals, explicit browser confirmation, unique reservations, cancellation and Google adapter | SQLite workflow and mock adapter verified; live Google event unverified |
 | F08 | Internal CRM lifecycle, consent-gated HubSpot email upsert and durable sync status | Local CRM and mock adapter verified; live HubSpot write unverified |
 | D03 | Customer to qualified lead to local appointment to CRM lifecycle | API-level local flow verified; live voice and external services unverified |
+
+## Phase 6 traceability update
+
+| ID | Phase 6 implementation | Verification / limitation |
+|---|---|---|
+| F09 | Unique interaction source, typed structured summary, deterministic record snapshot, optional Gemini narrative, lifecycle hook and retry | SQLite workflow and mocked Gemini contract verified; live model and voice call unverified |
+| F10 | Owner-scoped lead, interaction, appointment, property-demand and integration aggregates; History, Analytics and Overview pages | API tests and local workflow verified; browser visual QA pending |
+| D03 | Lead through booking, local CRM, summary and analytics | Synthetic SQLite workflow verified; external providers unverified |
