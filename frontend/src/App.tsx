@@ -8,6 +8,7 @@ import { Overview } from "./pages/Overview";
 import { Voice } from "./pages/Voice";
 import { Knowledge } from "./pages/Knowledge";
 import { Leads } from "./pages/Leads";
+import { Appointments } from "./pages/Appointments";
 
 function currentPage() {
   return window.location.hash.slice(1) || "overview";
@@ -82,6 +83,8 @@ export default function App() {
             <Knowledge />
           ) : page === "leads" ? (
             <Leads />
+          ) : page === "appointments" ? (
+            <Appointments />
           ) : (
             <div className="placeholder panel">
               <Construction size={38} />

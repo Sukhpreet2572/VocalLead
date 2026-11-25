@@ -2,7 +2,7 @@
 
 Autonomous multilingual sales intelligence for real estate. Buyers often wait for follow-up while sales teams repeatedly collect the same requirements. VocaLead aims to qualify enquiries through natural English, Hindi and Hinglish conversations, retrieve relevant property knowledge and hand actionable context to sales teams.
 
-**Current delivery: Phase 4 customer intelligence implemented and locally verified.** Phase 1 and 2 remain. Six fictional properties and policy documents support structured inventory and a Chroma semantic index. Owner-bound local customer memory, deterministic scoring and a Leads dashboard are implemented. Voice provider credentials are still absent. Appointment booking and CRM remain planned.
+**Current delivery: Phase 5 local appointment booking and CRM verified.** Earlier voice, knowledge and customer intelligence features remain. Owner-bound customers can confirm a real local site visit slot, prevent duplicate bookings, cancel and see local CRM status. Google Calendar and HubSpot adapters are implemented but external writes remain unverified. Voice provider credentials are still absent.
 
 ## Run locally (Windows PowerShell)
 
@@ -57,7 +57,7 @@ npm run build
 
 `frontend/src/{components,pages,hooks,services,types}` contains the React/TypeScript/Tailwind UI and API client. `backend/app/{api,core,schemas}` implements the FastAPI/Pydantic foundation; `database.py` owns SQLAlchemy engines and sessions. `backend/migrations` holds Alembic setup, with no business tables yet. `backend/tests`, `infrastructure`, `scripts`, `knowledge_base` and `docs` separate verification, deployment and project material.
 
-Voice dependencies now installed: LiveKit React/Agents, Deepgram, Silero, Gemini LLM and ElevenLabs TTS. Phase 3 adds Gemini/local embeddings, ChromaDB and PyMuPDF. Future dependencies (not installed): Calendar, HubSpot and Recharts. React uses simple hash navigation.
+Voice dependencies include LiveKit React/Agents, Deepgram, Silero, Gemini LLM and ElevenLabs TTS. Phase 3 adds Gemini/local embeddings, ChromaDB and PyMuPDF. Phase 5 uses Google Auth, Calendar REST and HubSpot REST adapters. React uses simple hash navigation.
 
 ## Roadmap and limitations
 
@@ -72,4 +72,8 @@ Read [setup](docs/setup.md), [architecture](docs/architecture.md), [requirements
 
 ## Phase 4 status
 
-The local customer intelligence slice now persists owner-bound demo profiles, partial requirements, explainable inventory-based scores and score history. The Leads page provides real API aggregates, a table, detail and deterministic text playground. LiveKit has per-call customer tools. Gemini extraction and sentiment adapters are implemented but unverified without credentials; the playground clearly uses a limited deterministic fallback. Live voice remains unverified. See docs/development_log.md and docs/rag_evaluation.md for measured results. No appointment or CRM integration is included.
+Phase 4 introduced owner-bound demo profiles, partial requirements, explainable inventory-based scores and score history. The Leads page uses actual API aggregates and a deterministic text playground. Gemini extraction and sentiment adapters remain unverified without credentials. See docs/development_log.md and docs/rag_evaluation.md for measured results.
+
+## Phase 5 status
+
+The Appointments page uses actual owner-bound availability, proposals, explicit confirmation, database slot reservations, cancellation and local CRM records. Google Calendar and HubSpot adapters are available only when explicitly configured; their live operations have not been verified. See [setup](docs/setup.md) for the local workflow and [architecture](docs/architecture.md) for consistency limits.

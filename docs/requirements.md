@@ -10,8 +10,8 @@ Status describes implementation, not promises. Phase 1 validation evidence is re
 | F04 | Lead qualification | Structured updates and deterministic inventory-based score | app/intelligence | 4 | Local 90-point example tested; Gemini extraction unverified | Fixture inputs produce explainable reproducible scores |
 | F05 | Sentiment-aware behaviour | Typed Gemini adapter and phrase fallback | app/intelligence | 4 | Fallback tested; live behaviour unverified | Negative sentiment prompts tested appropriate handling |
 | F06 | Semantic RAG | Gemini/local embeddings, Chroma and SQL unit filters | app/rag, knowledge_base | 3 | Implemented; genuine local semantic retrieval measured, multilingual quality limited | Retrieval benchmark and grounded answers pass |
-| F07 | Appointment automation | Confirm timezone/slot and idempotent Calendar write | app/tools, integrations | 4 | Planned | One confirmed request yields one event and persisted record |
-| F08 | External CRM | HubSpot sync with retry/idempotency records | app/integrations | 4 | Planned | Lead updates sync once and failures are visible |
+| F07 | Appointment automation | Owner-bound local slots, proposals, confirmation, cancellation; Google adapter | app/automation | 5 | Local workflow verified; Google live operation unverified | One confirmed request yields one reservation and persisted record |
+| F08 | External CRM | Local lifecycle record plus consent-gated HubSpot upsert adapter | app/automation | 5 | Local CRM verified; HubSpot live operation unverified | Lead and visit outcomes persist; external sync status is visible |
 | F09 | AI call summary | Structured post-call summary with evidence | app/intelligence | 4 | Planned | Summary preserves facts and flags uncertainty |
 | F10 | Business intelligence | Aggregates over actual calls/leads and Recharts | frontend/dashboard | 4 | Planned | Charts reconcile to persisted records |
 | P01 | Functional foundation | FastAPI, React and honest status dashboard | app/api, frontend | 1 | Implemented | Live servers, health, readiness and dashboard verified |
@@ -44,3 +44,11 @@ Later phases require a versioned consented/synthetic language corpus, STT accura
 | F05 | Sentiment-aware behaviour | Typed Gemini adapter and phrase fallback | app/intelligence | 4 | Fallback tested; live behaviour unverified | Negative sentiment prompts tested appropriate handling |
 | F06 | Gurgaon alias and exact eligible-property rank boost | Original benchmark unchanged at 0.3846 Hit Rate@K; Hindi/Hinglish weak |
 | D07 | Local owner-hash access checks and no default transcript persistence | Production authentication and retention review still required |
+
+## Phase 5 traceability update
+
+| ID | Phase 5 implementation | Verification / limitation |
+|---|---|---|
+| F07 | Local availability, short-lived proposals, explicit browser confirmation, unique reservations, cancellation and Google adapter | SQLite workflow and mock adapter verified; live Google event unverified |
+| F08 | Internal CRM lifecycle, consent-gated HubSpot email upsert and durable sync status | Local CRM and mock adapter verified; live HubSpot write unverified |
+| D03 | Customer to qualified lead to local appointment to CRM lifecycle | API-level local flow verified; live voice and external services unverified |

@@ -9,6 +9,7 @@ from livekit.plugins import deepgram, elevenlabs, google, silero
 from app.agents.prompts import instructions
 from app.agents.knowledge_tools import search_properties, get_property_details, search_company_knowledge
 from app.agents.intelligence_tools import tools_for_session
+from app.agents.automation_tools import tools_for_session as automation_tools_for_session
 from app.core.config import Settings
 from app.database import build_engine, session_factory
 from app.models.voice_session import VoiceSession
@@ -20,7 +21,7 @@ settings = Settings()
 class SalesAgent(Agent):
     def __init__(self, language: str, session_id: str | None = None) -> None:
         tools = [search_properties, get_property_details, search_company_knowledge]
-        if session_id: tools += tools_for_session(session_id)
+        if session_id: tools += tools_for_session(session_id) + automation_tools_for_session(session_id)
         super().__init__(instructions=instructions(language), tools=tools)
 
 

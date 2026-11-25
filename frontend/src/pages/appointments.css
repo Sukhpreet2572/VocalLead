@@ -1,0 +1,8 @@
+.appointments-page { display: grid; gap: 24px; }
+.appointments-section { padding: 24px; min-width: 0; }
+.appointments-section label { display: grid; gap: 8px; margin: 14px 0; }
+.appointments-section select, .appointments-section input { width: 100%; padding: 10px; border: 1px solid #d3d9e2; border-radius: 8px; background: transparent; color: inherit; }
+.appointments-section article, .appointments-section .proposal { border-top: 1px solid #d3d9e2; margin-top: 16px; padding-top: 16px; }
+.appointment-table-wrap { overflow-x: auto; }
+.appointments-section table { border-collapse: collapse; width: 100%; font-size: 13px; }
+.appointments-section th, .appointments-section td { padding: 9px; text-align: left; border-bottom: 1px solid #ddd; }

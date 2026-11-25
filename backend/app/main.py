@@ -11,6 +11,8 @@ from app.api.routes.system import router
 from app.api.routes.voice import router as voice_router
 from app.api.routes.knowledge import router as knowledge_router
 from app.api.routes.leads import router as leads_router
+from app.api.routes.appointments import router as appointments_router
+from app.api.routes.crm import router as crm_router
 from app.models.voice_session import VoiceSession  # noqa: F401 — migration registration
 from app.core.config import Settings
 from app.core.logging import configure_logging
@@ -63,6 +65,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     application.include_router(voice_router)
     application.include_router(knowledge_router)
     application.include_router(leads_router)
+    application.include_router(appointments_router)
+    application.include_router(crm_router)
     return application
 
 

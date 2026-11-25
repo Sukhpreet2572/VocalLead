@@ -52,6 +52,13 @@ class Settings(BaseSettings):
     google_calendar_id: str = ""
     google_application_credentials: SecretStr = SecretStr("")
     hubspot_access_token: SecretStr = SecretStr("")
+    calendar_provider: Literal["local", "google"] = "local"
+    crm_provider: Literal["local", "hubspot"] = "local"
+    appointment_timezone: Literal["Asia/Kolkata"] = "Asia/Kolkata"
+    appointment_duration_minutes: int = Field(default=30, ge=15, le=120)
+    appointment_booking_horizon_days: int = Field(default=14, ge=1, le=90)
+    appointment_min_notice_minutes: int = Field(default=120, ge=0, le=1440)
+    booking_proposal_ttl_seconds: int = Field(default=300, ge=60, le=1800)
 
     @field_validator("database_url")
     @classmethod
