@@ -9,6 +9,7 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from app.api.routes.system import router
 from app.api.routes.voice import router as voice_router
+from app.api.routes.knowledge import router as knowledge_router
 from app.models.voice_session import VoiceSession  # noqa: F401 — migration registration
 from app.core.config import Settings
 from app.core.logging import configure_logging
@@ -59,6 +60,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     application.include_router(router)
     application.include_router(voice_router)
+    application.include_router(knowledge_router)
     return application
 
 

@@ -2,7 +2,7 @@
 
 Autonomous multilingual sales intelligence for real estate. Buyers often wait for follow-up while sales teams repeatedly collect the same requirements. VocaLead aims to qualify enquiries through natural English, Hindi and Hinglish conversations, retrieve relevant property knowledge and hand actionable context to sales teams.
 
-**Current delivery: Phase 2 voice implementation, awaiting live provider verification.** The Phase 1 foundation remains. Voice adds a consent gate, LiveKit session API, dedicated worker, room audio, LiveKit transcripts, and SQLite session metadata. Missing provider credentials prevent a real call on this machine. RAG, persistent customer memory and sales operations remain planned.
+**Current delivery: Phase 3 knowledge subsystem implemented and locally verified.** Phase 1 and 2 remain. Six fictional properties and policy documents support structured inventory and a Chroma semantic index. Voice provider credentials are still absent. Persistent customer memory and sales operations remain planned.
 
 ## Run locally (Windows PowerShell)
 
@@ -57,7 +57,7 @@ npm run build
 
 `frontend/src/{components,pages,hooks,services,types}` contains the React/TypeScript/Tailwind UI and API client. `backend/app/{api,core,schemas}` implements the FastAPI/Pydantic foundation; `database.py` owns SQLAlchemy engines and sessions. `backend/migrations` holds Alembic setup, with no business tables yet. `backend/tests`, `infrastructure`, `scripts`, `knowledge_base` and `docs` separate verification, deployment and project material.
 
-Voice dependencies now installed: LiveKit React/Agents, Deepgram, Silero, Gemini LLM and ElevenLabs TTS. Future dependencies (not installed): Gemini embeddings, ChromaDB, Calendar, HubSpot and Recharts. React uses simple hash navigation.
+Voice dependencies now installed: LiveKit React/Agents, Deepgram, Silero, Gemini LLM and ElevenLabs TTS. Phase 3 adds Gemini/local embeddings, ChromaDB and PyMuPDF. Future dependencies (not installed): Calendar, HubSpot and Recharts. React uses simple hash navigation.
 
 ## Roadmap and limitations
 

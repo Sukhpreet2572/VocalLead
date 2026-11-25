@@ -1,5 +1,19 @@
 # Development setup
 
+## Phase 3 knowledge demo
+
+All inventory is synthetic. Apply migration `0002_property_knowledge`, then run the idempotent seed and ingestion from the repository root:
+
+```powershell
+$env:DEBUG='false'
+backend/.venv/Scripts/alembic.exe -c backend/alembic.ini upgrade head
+backend/.venv/Scripts/python.exe scripts/seed_properties.py
+# If GOOGLE_API_KEY is absent, set EMBEDDING_PROVIDER=local and RAG_COLLECTION_NAME=vocalead_local_multilingual in root .env first.
+backend/.venv/Scripts/python.exe scripts/ingest_documents.py
+```
+
+Gemini uses `gemini-embedding-001`; local uses `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`. Chroma persists under `data/chroma`. Never change the model in an existing collection; select a new `RAG_COLLECTION_NAME` and reingest. Open `http://localhost:5173/#knowledge` to inspect real counts, inventory and the retrieval playground. Unit-specific prices and availability are filtered in SQLite before vector passages are included. Reported cosine distance is not a confidence percentage. The local model download may be large. No provider credentials are placed in the frontend.
+
 ## Phase 2 voice setup
 
 Use a LiveKit Cloud project, a Deepgram API key, a Google Gemini API key and an ElevenLabs API key/voice. These services can incur charges; review each provider's plan before entering credentials. Add these variables to the existing root `.env` without replacing the SQLite `DATABASE_URL`: `LIVEKIT_URL`, `LIVEKIT_API_KEY`, `LIVEKIT_API_SECRET`, `DEEPGRAM_API_KEY`, `GOOGLE_API_KEY`, `TTS_PROVIDER=elevenlabs`, `TTS_API_KEY`, `TTS_MODEL=eleven_multilingual_v2`, and a Hindi/English-capable `TTS_VOICE_ID`. Optional defaults are `LIVEKIT_AGENT_NAME=vocalead-sales-agent`, `DEEPGRAM_STT_MODEL=nova-3`, `DEEPGRAM_STT_LANGUAGE=multi`, `GEMINI_MODEL=gemini-2.5-flash`, `VOICE_MAX_SESSION_SECONDS=600`, `VOICE_TOKEN_TTL_SECONDS=300`, `VOICE_TRANSCRIPT_RETENTION_ENABLED=false`. Confirm provider model and voice availability in your own account. Do not put keys in frontend `.env`.

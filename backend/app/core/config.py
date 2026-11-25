@@ -32,6 +32,14 @@ class Settings(BaseSettings):
     google_api_key: SecretStr = SecretStr("")
     gemini_model: str = ""
     gemini_embedding_model: str = ""
+    embedding_provider: Literal["gemini", "local"] = "gemini"
+    local_embedding_model: str = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+    rag_collection_name: str = "vocalead_knowledge"
+    rag_top_k: int = Field(default=5, ge=1, le=20)
+    rag_chunk_size: int = Field(default=800, ge=200, le=4000)
+    rag_chunk_overlap: int = Field(default=120, ge=0, le=1000)
+    rag_max_context_chars: int = Field(default=6000, ge=500, le=20000)
+    rag_max_cosine_distance: float = Field(default=0.6, ge=0, le=2)
     tts_provider: str = ""
     tts_api_key: SecretStr = SecretStr("")
     tts_model: str = ""

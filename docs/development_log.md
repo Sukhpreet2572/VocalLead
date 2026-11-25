@@ -1,5 +1,9 @@
 # Development log
 
+## Phase 3 continuation
+
+Created six fictional inventory entries, six generated brochures and three policy/FAQ documents. Migration `0002_property_knowledge` and repeatable seeding were run: six properties after both first and second seed. Added Gemini/local embedding adapters, persistent Chroma service, document ingestion CLI, strict unit-price filtering, retrieval API, voice tools and the Knowledge Base page. Actual local-model ingestion indexed 10 files and 14 chunks; repeat ingestion skipped all 10. The 15-query semantic evaluation gave Hit Rate 0.3846, Recall@K 0.30, MRR 0.2308, zero budget violations and two of two no-evidence detections. Backend: 17 tests passed, pip check passed, Alembic at 0002_property_knowledge. Frontend lint, typecheck and build passed with the existing bundle-size warning. A real API query returned three eligible 3 BHK units under INR 1.2 crore and a sourced brochure passage. Live voice use remains unverified. Phase 3 was completed locally before its separate commit.
+
 ## 2026-11-26 — Phase 2 voice implementation
 
 Added a minimal voice session migration, local-only consented session API, LiveKit room-scoped tokens and explicit worker dispatch, a separate Python AgentServer worker with Deepgram Nova-3, Gemini 2.5 Flash, ElevenLabs multilingual TTS and Silero VAD, and a React Live Voice Agent page with microphone permission, LiveKit audio, activity state and text stream transcription. Within-call context and interruptions use AgentSession. No transcript or raw audio storage was added. The frontend retains Phase 1 pages.

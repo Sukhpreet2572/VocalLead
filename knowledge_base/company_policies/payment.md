@@ -1,0 +1,2 @@
+# VocaLead Realty payment guidance
+Synthetic demonstration policy, updated 2026-11-26. Unit prices in the structured inventory are integer INR and may exclude stamp duty, registration, taxes and maintenance. Payment schedules vary by development and are shown in the inventory. A sales representative must confirm the current written offer. No discount or appreciation return is guaranteed. Never transfer funds based only on an AI conversation.

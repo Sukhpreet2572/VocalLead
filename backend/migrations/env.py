@@ -3,6 +3,7 @@ from alembic import context
 from app.core.config import Settings
 from app.database import Base, build_engine
 from app.models.voice_session import VoiceSession  # noqa: F401
+from app.models.property import Property, PropertyUnit, KnowledgeDocument  # noqa: F401
 from sqlalchemy.engine import make_url
 
 target_metadata = Base.metadata

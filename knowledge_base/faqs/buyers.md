@@ -1,0 +1,2 @@
+# Buyer questions
+Synthetic demonstration information, updated 2026-11-26. Ask the sales team for title documents, regulatory registration, parking allocation, maintenance charges and a written price sheet before a purchase decision. Available-unit counts are demonstration snapshots and require human confirmation. The AI assistant can describe recorded facts but cannot reserve a unit or guarantee availability.

@@ -6,6 +6,7 @@ import { Badge } from "./components/common/Badge";
 import { useSystemStatus } from "./hooks/useSystemStatus";
 import { Overview } from "./pages/Overview";
 import { Voice } from "./pages/Voice";
+import { Knowledge } from "./pages/Knowledge";
 
 function currentPage() {
   return window.location.hash.slice(1) || "overview";
@@ -76,6 +77,8 @@ export default function App() {
             <Overview {...status} />
           ) : page === "voice" ? (
             <Voice />
+          ) : page === "knowledge" ? (
+            <Knowledge />
           ) : (
             <div className="placeholder panel">
               <Construction size={38} />

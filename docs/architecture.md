@@ -1,5 +1,7 @@
 # Architecture and engineering decisions
 
+Phase 3 adds canonical property/unit prices in SQLite and narrative chunks in persistent ChromaDB. Ingestion embeds approved knowledge files, stores model identity on the collection, and skips unchanged documents. Queries embed with the same model; SQL unit filters decide budget and availability before retrieved property passages can be presented. The LiveKit agent's tools call this same service from a worker thread with a timeout. Documents are untrusted evidence and cannot override agent instructions.
+
 Phase 2 adds the separately executable LiveKit worker and a minimal voice session table. The voice path is implemented but has not been exercised with real provider credentials. Health is process liveness; readiness executes SQL `SELECT 1`; development diagnostics only checks credential presence, never provider reachability.
 
 ## Phase 2 voice path

@@ -7,6 +7,7 @@ from livekit.agents import Agent, AgentServer, AgentSession, cli
 from livekit.plugins import deepgram, elevenlabs, google, silero
 
 from app.agents.prompts import instructions
+from app.agents.knowledge_tools import search_properties, get_property_details, search_company_knowledge
 from app.core.config import Settings
 from app.database import build_engine, session_factory
 from app.models.voice_session import VoiceSession
@@ -16,7 +17,7 @@ settings = Settings()
 
 class SalesAgent(Agent):
     def __init__(self, language: str) -> None:
-        super().__init__(instructions=instructions(language))
+        super().__init__(instructions=instructions(language), tools=[search_properties, get_property_details, search_company_knowledge])
 
 
 server = AgentServer()

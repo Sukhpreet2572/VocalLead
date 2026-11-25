@@ -9,7 +9,7 @@ Status describes implementation, not promises. Phase 1 validation evidence is re
 | F03 | English, Hindi and Hinglish | Selector, multilingual STT/TTS and language prompt | app/voice | 2 | Implemented; speech quality unverified | Scripted and free-form language tests pass |
 | F04 | Lead qualification | Structured extraction with deterministic score | app/intelligence | 3 | Planned | Fixture inputs produce explainable reproducible scores |
 | F05 | Sentiment-aware behaviour | Evidence-based sentiment and response policy | app/intelligence | 3 | Planned | Negative sentiment prompts tested appropriate handling |
-| F06 | Semantic RAG | Gemini embeddings, Chroma and metadata filters | app/rag, knowledge_base | 3 | Planned | Retrieval benchmark and grounded answers pass |
+| F06 | Semantic RAG | Gemini/local embeddings, Chroma and SQL unit filters | app/rag, knowledge_base | 3 | Implemented; genuine local semantic retrieval measured, multilingual quality limited | Retrieval benchmark and grounded answers pass |
 | F07 | Appointment automation | Confirm timezone/slot and idempotent Calendar write | app/tools, integrations | 4 | Planned | One confirmed request yields one event and persisted record |
 | F08 | External CRM | HubSpot sync with retry/idempotency records | app/integrations | 4 | Planned | Lead updates sync once and failures are visible |
 | F09 | AI call summary | Structured post-call summary with evidence | app/intelligence | 4 | Planned | Summary preserves facts and flags uncertainty |

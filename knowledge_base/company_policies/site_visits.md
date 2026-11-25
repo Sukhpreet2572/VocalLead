@@ -1,0 +1,2 @@
+# VocaLead Realty site visits
+Synthetic demonstration policy, updated 2026-11-26. Visits are normally available Tuesday through Sunday from 10:00 to 17:00 Asia/Kolkata. A sales representative must confirm the exact slot and property access. The AI assistant cannot make or confirm a booking in this phase. Bring photo identification for security registration. Do not rely on this fictional policy for a real property visit.
