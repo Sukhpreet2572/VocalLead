@@ -1,0 +1,142 @@
+.voice-page .detail-grid {
+  grid-template-columns: 1.2fr 1fr;
+}
+.voice-main,
+.voice-activity {
+  padding: 28px;
+}
+.voice-main h2,
+.voice-activity h2 {
+  font-size: 1.2rem;
+  margin-bottom: 14px;
+}
+.voice-muted {
+  color: #aebbd0;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+.voice-label {
+  display: grid;
+  gap: 8px;
+  margin: 24px 0;
+  color: #d3def1;
+}
+.voice-label select {
+  background: #1d293b;
+  border: 1px solid #48566d;
+  border-radius: 7px;
+  color: white;
+  padding: 12px;
+  font: inherit;
+  max-width: 320px;
+}
+.voice-consent {
+  background: #1a2638;
+  border: 1px solid #34445c;
+  border-radius: 9px;
+  padding: 20px;
+  margin: 20px 0;
+  line-height: 1.6;
+}
+.voice-consent p {
+  color: #aebbd0;
+  margin: 8px 0 16px;
+}
+.voice-consent label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.voice-consent input {
+  margin-top: 6px;
+}
+.voice-start {
+  background: #5354bd;
+  border-color: #7779e2;
+  color: #fff;
+  padding: 13px 24px;
+  font-size: 1rem;
+}
+.voice-start:disabled {
+  opacity: 0.5;
+}
+.voice-end {
+  border-color: #a85059;
+  color: #f7b9bf;
+  margin-left: 10px;
+}
+.voice-connected {
+  display: grid;
+  gap: 18px;
+}
+.voice-call-heading {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.1rem;
+}
+.voice-agent-state {
+  background: #172337;
+  padding: 20px;
+  border-radius: 8px;
+  min-height: 100px;
+}
+.voice-agent-state strong {
+  color: #80d6c1;
+}
+.voice-transcript {
+  height: 300px;
+  overflow: auto;
+  background: #0d1523;
+  border: 1px solid #344055;
+  padding: 18px;
+  border-radius: 8px;
+}
+.voice-transcript h3 {
+  font-size: 1rem;
+  margin-bottom: 18px;
+}
+.voice-transcript > p,
+.voice-activity > p {
+  color: #aab8cb;
+}
+.voice-line {
+  border-top: 1px solid #2c3950;
+  padding: 12px 0;
+}
+.voice-line strong {
+  color: #a8a7ff;
+}
+.voice-line p {
+  margin: 6px 0;
+}
+.voice-line small,
+.voice-activity time {
+  color: #93a0b7;
+}
+.voice-activity ol {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+.voice-activity li {
+  border-top: 1px solid #2c3950;
+  padding: 12px 0;
+  color: #d4def0;
+}
+.voice-activity time {
+  margin-right: 8px;
+}
+@media (max-width: 850px) {
+  .voice-page .detail-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 600px) {
+  .voice-main,
+  .voice-activity {
+    padding: 20px;
+  }
+  .voice-end {
+    margin: 8px 0 0;
+  }
+}

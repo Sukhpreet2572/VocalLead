@@ -25,8 +25,10 @@ class Settings(BaseSettings):
     livekit_url: str = ""
     livekit_api_key: SecretStr = SecretStr("")
     livekit_api_secret: SecretStr = SecretStr("")
+    livekit_agent_name: str = "vocalead-sales-agent"
     deepgram_api_key: SecretStr = SecretStr("")
     deepgram_stt_model: str = ""
+    deepgram_stt_language: str = "multi"
     google_api_key: SecretStr = SecretStr("")
     gemini_model: str = ""
     gemini_embedding_model: str = ""
@@ -34,6 +36,10 @@ class Settings(BaseSettings):
     tts_api_key: SecretStr = SecretStr("")
     tts_model: str = ""
     tts_voice_id: str = ""
+    voice_default_language: Literal["en", "hi", "hinglish"] = "en"
+    voice_max_session_seconds: int = Field(default=600, ge=30, le=3600)
+    voice_token_ttl_seconds: int = Field(default=300, ge=30, le=900)
+    voice_transcript_retention_enabled: bool = False
     chroma_persist_directory: str = "./data/chroma"
     google_calendar_id: str = ""
     google_application_credentials: SecretStr = SecretStr("")

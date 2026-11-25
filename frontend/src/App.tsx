@@ -5,6 +5,7 @@ import { navigation } from "./components/layout/navigation";
 import { Badge } from "./components/common/Badge";
 import { useSystemStatus } from "./hooks/useSystemStatus";
 import { Overview } from "./pages/Overview";
+import { Voice } from "./pages/Voice";
 
 function currentPage() {
   return window.location.hash.slice(1) || "overview";
@@ -73,7 +74,9 @@ export default function App() {
         <main id="main" tabIndex={-1}>
           {page === "overview" ? (
             <Overview {...status} />
-           ) : (
+          ) : page === "voice" ? (
+            <Voice />
+          ) : (
             <div className="placeholder panel">
               <Construction size={38} />
               <Badge>PLANNED FEATURE</Badge>
@@ -93,4 +96,3 @@ export default function App() {
     </div>
   );
 }
-
